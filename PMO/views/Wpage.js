@@ -4,21 +4,30 @@ import { MaterialIcons , MaterialCommunityIcons } from '@expo/vector-icons';
 import { Menu, MenuItem } from 'react-native-material-menu';
 import { styles } from './Styles.js';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
 const Wpage = () => {
 
-    const [visible, setVisible] = useState(false);
-  
-  const hideMenu = () => setVisible(false);
-  const showMenu = () => setVisible(true);
+  const navigation = useNavigation();
 
+  // Funções de navegação
+  const handleLoginPress = () => {
+    navigation.navigate('Login');
+  };
+
+  const handleRegisterPress = () => {
+    navigation.navigate('Cadastro');
+  };
+  
+  const [visible, setVisible] = useState(false);
+  
   const handleSuggestionPress = () => {
     // Aqui você pode implementar a navegação para a tela de sugestão
     // ou abrir um formulário de contato
-    console.log('Sugerir localidade pressionado');
+    Linking.openURL('https://forms.gle/B3hdwvUbTvxzbmZYA');
   };
 
   const handleEmailPress = () => {
@@ -31,47 +40,27 @@ const Wpage = () => {
   // Componente seguro
 
   return (
-    <View style={styles.fullContainer}>
-      {/* Header/Menu Superior */}
+      <View style={styles.fullContainer}>
+      {/* Header com botões de Login/Registro */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>PINGO</Text>
-        <Menu
-          visible={visible}
-          anchor={
-            <TouchableOpacity onPress={showMenu}>
-              <MaterialIcons name="menu" size={28} color="white" />
-            </TouchableOpacity>
-          }
-          onRequestClose={hideMenu}
-          style={styles.menuContainer}
-        >
-          <MenuItem onPress={hideMenu}>
-            <View style={styles.menuItem}>
-              <MaterialCommunityIcons name="information" size={20} color="#4CAF50" />
-              <Text style={styles.menuText}>Sobre o Pingo</Text>
-            </View>
-          </MenuItem>
-          <MenuItem onPress={hideMenu}>
-            <View style={styles.menuItem}>
-              <MaterialCommunityIcons name="help-circle" size={20} color="#4CAF50" />
-              <Text style={styles.menuText}>Perguntas Frequentes</Text>
-            </View>
-          </MenuItem>
-          <MenuItem onPress={hideMenu}>
-            <View style={styles.menuItem}>
-              <MaterialCommunityIcons name="email" size={20} color="#4CAF50" />
-              <Text style={styles.menuText}>Contato</Text>
-            </View>
-          </MenuItem>
-          <MenuItem onPress={hideMenu}>
-            <View style={styles.menuItem}>
-              <MaterialCommunityIcons name="map-marker-plus" size={20} color="#4CAF50" />
-              <Text style={styles.menuText}>Sugerir Local</Text>
-            </View>
-          </MenuItem>
-        </Menu>
+        
+        <View style={styles.authButtonsContainer}>
+          <TouchableOpacity 
+            style={styles.authButton}
+            onPress={handleLoginPress}
+          >
+            <Text style={styles.authButtonText}>Login</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={[styles.authButton, styles.registerButton]}
+            onPress={handleRegisterPress}
+          >
+            <Text style={styles.authButtonText}>Registrar-se</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
       {/* Conteúdo principal (scrollável) */}
       <ScrollView style={styles.container}>
         {/* Cabeçalho */}
@@ -96,7 +85,7 @@ const Wpage = () => {
         <View style={styles.stepsContainer}>
           <View style={styles.step}>
             <MaterialIcons name="search" size={30} color="#4CAF50" />
-            <Text style={styles.stepText}>Encontre a Quadra que Deseja</Text>
+            <Text style={styles.stepText}>Encontre a local que Deseja</Text>
           </View>
           
           <View style={styles.step}>
@@ -138,9 +127,9 @@ const Wpage = () => {
         <Text style={styles.sectionSubtitle}>Perguntas Frequentes</Text>
         
         <View style={styles.faqItem}>
-          <Text style={styles.faqQuestion}>"Eu Agenda um Horário na Quadra Pública?"</Text>
+          <Text style={styles.faqQuestion}>"Eu Agenda um Horário em Local Público?"</Text>
           <Text style={styles.faqAnswer}>
-            Não. Apenas divulgamos informações sobre essas quadras para que os moradores da região possam conhecê-las, incentivando a prática de esportes e promovendo o bem-estar da comunidade. Não realizamos agendamentos, pois elas são de uso público.
+            Não. Apenas divulgamos informações sobre esses locais para que os moradores da região possam conhecê-las, incentivando a prática de esportes e promovendo o bem-estar da comunidade. Não realizamos agendamentos, pois elas são de uso público.
           </Text>
         </View>
       </View>

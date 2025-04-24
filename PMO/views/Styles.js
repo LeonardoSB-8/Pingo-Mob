@@ -74,6 +74,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
+  // headerContainer: {
+  //   backgroundColor: '#4CAF50',
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   paddingHorizontal: 20,
+  //   paddingTop: StatusBar.currentHeight + 10,
+  //   paddingBottom: 15,
+  //   elevation: 4,
+  //   shadowColor: '#000',
+  //   shadowOffset: { width: 0, height: 2 },
+  //   shadowOpacity: 0.2,
+  //   shadowRadius: 4,
+  //   zIndex: 100,},
   headerContainer: {
     backgroundColor: '#4CAF50',
     flexDirection: 'row',
@@ -82,12 +96,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: StatusBar.currentHeight + 10,
     paddingBottom: 15,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    zIndex: 100,
+  },
+  
+  authButtonsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  
+  authButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 20,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    marginLeft: 8,
+  },
+  
+  registerButton: {
+    backgroundColor: '#388E3C', // Verde mais escuro para diferenciar
+  },
+  
+  authButtonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
   headerTitle: {
     fontSize: 22,
