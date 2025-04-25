@@ -1,93 +1,28 @@
-import { StyleSheet , StatusBar } from 'react-native';
-
-// const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       backgroundColor: '#8f2f45',
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//      },
-    // TextInput: {
-    //    width: '95%',
-    //    borderWidth: 1,
-    //    margin: 10,
-    //    padding: 10,
-    // },
-    // button: {
-    //    width: '95%',
-    //    color: 'orange'  ,
-    //    backgroundColor: '#DDDDDD'  ,
-    //    padding: 10,
-    //    alignItems: 'center',
-    //    borderRadius: 500,  
-    // },
-    // text: {
-    //     color: 'blue',
-    // },
-    // logo: {
-    //   top: '1%',
-    //   left: '12%',
-    //   width: 300,
-    //   height: 300,
-    //   borderRadius: 500,
-    // },
-    // Imagem2: {
-    //   width: 300,
-    //   height: 300,
-    //   borderRadius: 500,
-    // },
-    // Imagem3: {
-    //   width: 300,
-    //   height: 300,
-    //   borderRadius: 500,
-    // 
-    // },
-    // view1:{
-    //   padding: 20,
-    //   marginVertical: 8,
-    //   borderRadius: 10,
-    //   backgroundColor:"green",
-    //   width:"100%",
-    //   height:"30%"
-    // },
-    // view2:{
-    //   padding: 20,
-    //   marginVertical: 8,
-    //   borderRadius: 10,
-    //   backgroundColor:"red",
-    //   width:"100%",
-    //   height:"30%"
-    // },
-    // view3:{
-    //   padding: 20,
-    //   marginVertical: 8,
-    //   borderRadius: 10,
-    //   backgroundColor:"pink",
-    //   width:"100%",
-    //   height:"30%"
-    // },
-    
-// });
+import { StyleSheet, StatusBar } from 'react-native';
 
 const styles = StyleSheet.create({
+  // ===== ESTILOS GLOBAIS ===== //
   fullContainer: {
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
-  // headerContainer: {
-  //   backgroundColor: '#4CAF50',
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   paddingHorizontal: 20,
-  //   paddingTop: StatusBar.currentHeight + 10,
-  //   paddingBottom: 15,
-  //   elevation: 4,
-  //   shadowColor: '#000',
-  //   shadowOffset: { width: 0, height: 2 },
-  //   shadowOpacity: 0.2,
-  //   shadowRadius: 4,
-  //   zIndex: 100,},
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    paddingHorizontal: 24,
+    paddingVertical: 40,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#ddd',
+    marginVertical: 15,
+    marginHorizontal: 20,
+  },
+
+  // ===== HEADER ===== //
   headerContainer: {
     backgroundColor: '#4CAF50',
     flexDirection: 'row',
@@ -97,12 +32,17 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight + 10,
     paddingBottom: 15,
   },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: 'white',
+  },
   
+  // ===== BOTÕES DE AUTENTICAÇÃO ===== //
   authButtonsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  
   authButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 20,
@@ -110,21 +50,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginLeft: 8,
   },
-  
   registerButton: {
-    backgroundColor: '#388E3C', // Verde mais escuro para diferenciar
+    backgroundColor: '#388E3C',
   },
-  
   authButtonText: {
     color: 'white',
     fontSize: 14,
     fontWeight: 'bold',
   },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: 'white',
-  },
+  
+  // ===== MENU ===== //
   menuContainer: {
     marginTop: 40,
     borderRadius: 8,
@@ -140,10 +75,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
+
+  // ===== WELCOME PAGE ===== //
   header: {
     padding: 20,
     alignItems: 'center',
@@ -165,12 +98,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     color: '#666',
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#ddd',
-    marginVertical: 15,
-    marginHorizontal: 20,
   },
   section: {
     paddingHorizontal: 20,
@@ -274,6 +201,84 @@ const styles = StyleSheet.create({
     color: '#4CAF50',
     marginVertical: 5,
     textDecorationLine: 'underline',
+  },
+
+  // ===== TELAS DE AUTENTICAÇÃO (LOGIN/CADASTRO) ===== //
+  authHeader: {
+    marginBottom: 40,
+    alignItems: 'center',
+  },
+  authTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  formContainer: {
+    width: '100%',
+  },
+  inputContainer: {
+    marginBottom: 24,
+  },
+  label: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 8,
+    fontWeight: '500',
+  },
+  input: {
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    fontSize: 16,
+    color: '#333',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  passwordContainer: {
+    position: 'relative',
+  },
+  passwordInput: {
+    paddingRight: 50,
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: 16,
+    top: 14,
+  },
+  primaryButton: { // Este estilo será usado pelo botão "Continuar"
+    backgroundColor: '#4CAF50',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginTop: 24,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  primaryButtonText: { // Estilo do texto do botão
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  authLinkContainer: { // Container do texto "Não tem uma conta?"
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 32,
+    alignItems: 'center',
+  },
+  authLinkText: { // Texto principal
+    color: '#666',
+    fontSize: 14,
+  },
+  authLink: { // Texto "Registrar"
+    color: '#4CAF50',
+    fontWeight: '600',
+    fontSize: 14,
+    marginLeft: 4,
   },
 });
 
