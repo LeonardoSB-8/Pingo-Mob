@@ -32,7 +32,7 @@ ______________________________________________________________
 
 ________________________________________________________________
 
-git clone <URL_DO_REPOSITORIO>
+git clone <https://github.com/LeonardoSB-8/Pingo-Mob>
 
 cd Pingo-Mobile/PMO
 
