@@ -25,9 +25,9 @@ const Wpage = () => {
   const [visible, setVisible] = useState(false);
   
   const handleSuggestionPress = () => {
-    // Aqui você pode implementar a navegação para a tela de sugestão
-    // ou abrir um formulário de contato
-    Linking.openURL('https://forms.gle/B3hdwvUbTvxzbmZYA');
+    Linking.openURL('https://forms.gle/B3hdwvUbTvxzbmZYA').catch(() => {
+      alert('Não foi possível abrir o formulário');
+    });
   };
 
   const handleEmailPress = () => {
@@ -143,7 +143,7 @@ const Wpage = () => {
           <Text style={styles.footerLink}>Sobre o Pingo</Text>
           <Text style={styles.footerLink}>Perguntas Frequentes</Text>
         </View>
-        
+        <Text style={styles.contactTitle}>Contatos</Text>
         <TouchableOpacity onPress={handleEmailPress}>
           <Text style={styles.contactLink}>E-mail: pingo@gmail.com</Text>
         </TouchableOpacity>

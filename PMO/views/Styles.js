@@ -196,6 +196,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     textDecorationLine: 'underline',
   },
+  contactTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
   contactLink: {
     fontSize: 14,
     color: '#4CAF50',
@@ -280,6 +286,153 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 4,
   },
+  // Estilos específicos da Home
+ mainHeader: {
+  backgroundColor: '#4CAF50',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingVertical: 15,
+  paddingHorizontal: 20,
+},
+appTitle: {
+  fontSize: 22,
+  fontWeight: 'bold',
+  color: 'white',
+  textAlign: 'center',
+},
+userIcon: {
+  flex: 1,
+  alignItems: 'flex-end',
+},
+
+// Sub-header
+subHeader: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingVertical: 12,
+  paddingHorizontal: 20,
+  backgroundColor: '#f5f5f5',
+  borderBottomWidth: 1,
+  borderBottomColor: '#e0e0e0',
+},
+sectionTitle: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: '#333',
+},
+indicateLink: {
+  color: '#4CAF50',
+  fontWeight: '600',
+  textDecorationLine: 'underline',
+},
+  // Header "Locais Disponíveis"
+  locaisHeader: {
+    backgroundColor: '#f5f5f5',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  locaisTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  homeHeader: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+  },
+  homeTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  quadraContainer: {
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    borderRadius: 10,
+    margin: 15,
+    overflow: 'hidden',
+    backgroundColor: 'white',
+  },
+  quadraHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  quadraImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 8,
+    marginRight: 15,
+  },
+  quadraInfo: {
+    flex: 1,
+  },
+  quadraNome: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 5,
+  },
+  quadraEsportes: {
+    fontSize: 14,
+    color: '#4CAF50',
+    fontWeight: '500',
+  },
+  quadraDetails: {
+    padding: 15,
+  },
+  detailRow: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  detailLabel: {
+    fontWeight: 'bold',
+    width: 80,
+    color: '#555',
+  },
+  detailValue: {
+    flex: 1,
+    color: '#333',
+  },
+  esportesContainer: {
+    marginTop: 10,
+    paddingLeft: 10,
+  },
+  esporteItem: {
+    color: '#4CAF50',
+    marginBottom: 5,
+    includeFontPadding: false,
+  },
+  homeFooter: {
+    marginTop: 20,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+    alignItems: 'center',
+  },
+  contactContainer: {
+    marginTop: 15,
+    alignItems: 'center',
+  },
+  contactTitle: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  contactItem: {
+    color: '#555',
+    marginBottom: 3,
+  },
+  
+  debugBorder: {
+  borderWidth: 1,
+  borderColor: 'red',
+}
 });
 
 export { styles };

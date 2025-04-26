@@ -1,11 +1,132 @@
-// views/Home.js
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Linking } from 'react-native';
+import { styles } from './Styles';
+import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Home() {
+const Home = () => {
+  // Dados mockados das quadras (substituir por dados reais posteriormente)
+  const quadras = [
+    {
+      nome: "Quadra Moema",
+      regiao: "Zona Sul",
+      endereco: "Av. Ibirapuera, 3103 - Moema, São Paulo, SP",
+      esportes: ["Futebol", "Basquete"],
+      foto: require('../assets/cerebro.jpg') // Substitua pela imagem real
+    },
+    {
+      nome: "Quadra Paulista",
+      regiao: "Zona Oeste",
+      endereco: "Rua Augusta, 1000 - Consolação, São Paulo, SP",
+      esportes: ["Vôlei", "Basquete"],
+      foto: require('../assets/gatinn.jpg') // Substitua pela imagem real
+    }
+  ];
+  const navigation = useNavigation();
+
+  const handleSuggestionPress = () => {
+    Linking.openURL('https://forms.gle/B3hdwvUbTvxzbmZYA').catch(() => {
+      alert('Não foi possível abrir o formulário');
+    });
+  };
+
+  const handleUserPress = () => {
+    if (navigation) {
+      navigation.navigate('Perfil');
+    }
+  };
+   const handleEmailPress = () => {
+      Linking.openURL('mailto:pingo@gmail.com');
+    };
+  
+    const handlePhonePress = () => {
+      Linking.openURL('tel:+5511938365724');
+    };
+
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <ScrollView style={styles.fullContainer}>
+      {/* Header Superior com Ícone de Usuário */}
+      <View style={styles.mainHeader}>
+         {/* Espaço vazio para centralizar o título */}
+        
+        <Text style={styles.appTitle}>PINGO</Text>
+        
+        <TouchableOpacity onPress={handleUserPress} style={styles.userIcon}>
+          <MaterialIcons name="account-circle" size={28} color="white" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Subtítulo com Link */}
+      <View style={styles.subHeader}>
+        <Text style={styles.sectionTitle}>Locais Disponíveis</Text>
+        <TouchableOpacity onPress={handleSuggestionPress}>
+          <Text style={styles.indicateLink}>Indicar Local</Text>
+        </TouchableOpacity>
+      </View>
+
+
+      {/* Lista de Quadras */}
+      {quadras.map((quadra, index) => (
+        <View key={index} style={styles.quadraContainer}>
+          {/* Cabeçalho da Quadra */}
+          <View style={styles.quadraHeader}>
+            <Image 
+              source={quadra.foto} 
+              style={styles.quadraImage} 
+              resizeMode="cover"
+              defaultSource={require('../assets/favicon.png')} // Adicione uma imagem padrão
+            />
+            <View style={styles.quadraInfo}>
+              <Text style={styles.quadraNome}>{quadra.nome}</Text>
+              <Text style={styles.quadraEsportes}>✗ Esportes</Text>
+            </View>
+          </View>
+
+          {/* Detalhes da Quadra */}
+          <View style={styles.quadraDetails}>
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Região:</Text>
+                <Text style={styles.detailValue}>{quadra.regiao}</Text>
+              </View>
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Endereço:</Text>
+                <Text style={styles.detailValue}>{quadra.endereco}</Text>
+              </View>
+              
+                {/* Esportes disponíveis */}
+                <View style={styles.esportesContainer}>
+                  {quadra.esportes.map((esporte, i) => (
+                    <Text key={i} style={styles.esporteItem}>
+                      {'● ' + esporte}
+                    </Text>
+                    ))}
+                  </View>
+            </View>
+        </View>
+      ))}
+      {/* Rodapé */}
+      <View style={styles.homeFooter}>
+        <Text style={styles.footerTitle}>PINGO</Text>
+        <Text style={styles.footerText}>© 2025 PINGO, Inc</Text>
+        
+        <View style={styles.footerLinks}>
+          <Text style={styles.footerLink}>Sobre o Pingo</Text>
+          <Text style={styles.footerLink}>Perguntas Frequentes</Text>
+        </View>
+        
+        <View style={styles.contactContainer}>
+          <Text style={styles.contactTitle}>Contatos</Text>
+          <TouchableOpacity onPress={handleEmailPress}>
+                    <Text style={styles.contactLink}>E-mail: pingo@gmail.com</Text>
+                  </TouchableOpacity>
+                  
+                  <TouchableOpacity onPress={handlePhonePress}>
+                    <Text style={styles.contactLink}>Telefone: +55 11 93836-5724</Text>
+                  </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
   );
-}
+};
+
+export default Home;
