@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles.js';
@@ -29,6 +29,7 @@ const Cadastro = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Cabeçalho */}
         <View style={styles.authHeader}>
+          <Image source={require('../assets/logo.png')} style={styles.Logo} resizeMode="contain"/>
           <Text style={styles.authTitle}>Registrar-se</Text>
         </View>
 

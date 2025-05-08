@@ -21,23 +21,59 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 20,
   },
-
-  // ===== HEADER ===== //
-  headerContainer: {
-    backgroundColor: '#4CAF50',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  backButton: {
+    padding: 5,
+    marginRight: 10,
+  },
+  Logo: {
+    marginTop: 10,
+    width: 100,
+    height: 40,
+  },
+  userIcon: {
+    flex: 1,
+    marginTop: 5,
+    alignItems: 'flex-end',
+  },
+  // ===== RODAPÉ GLOBAL ===== //
+  footer: {
+    padding: 20,
+    backgroundColor: '#e9e9e9',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: StatusBar.currentHeight + 10,
-    paddingBottom: 15,
   },
-  headerTitle: {
-    fontSize: 22,
+  footerText: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 15,
+  },
+  footerLinks: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 15,
+  },
+  footerLink: {
+    fontSize: 14,
+    color: '#4CAF50',
+    marginHorizontal: 10,
+    textDecorationLine: 'underline',
+  },
+  contactContainer: {
+    marginTop: 15,
+    alignItems: 'center',
+  },
+  contactTitle: {
+    fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#333',
+    marginBottom: 10,
   },
-  
+  contactLink: {
+    fontSize: 14,
+    color: '#4CAF50',
+    marginVertical: 5,
+    textDecorationLine: 'underline',
+  },
+
   // ===== BOTÕES DE AUTENTICAÇÃO ===== //
   authButtonsContainer: {
     flexDirection: 'row',
@@ -59,24 +95,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   
-  // ===== MENU ===== //
-  menuContainer: {
-    marginTop: 40,
-    borderRadius: 8,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    paddingVertical: 8,
-  },
-  menuText: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: '#333',
-  },
-
   // ===== WELCOME PAGE ===== //
+  headerContainer: {
+    backgroundColor: '#4CAF50',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: StatusBar.currentHeight + 10,
+    paddingBottom: 15,
+  },
   header: {
     padding: 20,
     alignItems: 'center',
@@ -169,45 +197,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
   },
-  footer: {
-    padding: 20,
-    backgroundColor: '#e9e9e9',
-    alignItems: 'center',
-  },
-  footerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4CAF50',
-    marginBottom: 5,
-  },
-  footerText: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 15,
-  },
-  footerLinks: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 15,
-  },
-  footerLink: {
-    fontSize: 14,
-    color: '#4CAF50',
-    marginHorizontal: 10,
-    textDecorationLine: 'underline',
-  },
-  contactTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
-  },
-  contactLink: {
-    fontSize: 14,
-    color: '#4CAF50',
-    marginVertical: 5,
-    textDecorationLine: 'underline',
-  },
+ 
 
   // ===== TELAS DE AUTENTICAÇÃO (LOGIN/CADASTRO) ===== //
   authHeader: {
@@ -252,7 +242,7 @@ const styles = StyleSheet.create({
     right: 16,
     top: 14,
   },
-  primaryButton: { // Este estilo será usado pelo botão "Continuar"
+  primaryButton: { // Este estilo será usado pelo botão "Continuar, Criar"
     backgroundColor: '#4CAF50',
     borderRadius: 8,
     paddingVertical: 12,
@@ -286,36 +276,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 4,
   },
-  // Estilos específicos da Home
+// ===== TELA HOME ===== //
  mainHeader: {
   backgroundColor: '#4CAF50',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  alignItems: 'center',
   paddingVertical: 15,
   paddingHorizontal: 20,
 },
-appTitle: {
-  fontSize: 22,
-  fontWeight: 'bold',
-  color: 'white',
-  textAlign: 'center',
-},
-userIcon: {
-  flex: 1,
-  alignItems: 'flex-end',
-},
+
 
 // Sub-header
 subHeader: {
-  flexDirection: 'row',
+  flex:1,
   justifyContent: 'space-between',
-  alignItems: 'center',
-  paddingVertical: 12,
+  alignItems: 'flex-end',
+  marginTop: 20,
   paddingHorizontal: 20,
   backgroundColor: '#f5f5f5',
-  borderBottomWidth: 1,
-  borderBottomColor: '#e0e0e0',
+
 },
 sectionTitle: {
   fontSize: 18,
@@ -410,29 +389,105 @@ indicateLink: {
     marginBottom: 5,
     includeFontPadding: false,
   },
-  homeFooter: {
-    marginTop: 20,
-    padding: 20,
-    backgroundColor: '#f5f5f5',
-    alignItems: 'center',
-  },
-  contactContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  contactTitle: {
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  contactItem: {
-    color: '#555',
-    marginBottom: 3,
-  },
-  
-  debugBorder: {
-  borderWidth: 1,
-  borderColor: 'red',
-}
+
+// ===== TELA LOCALIDADE ===== //
+localHeader: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingHorizontal: 20,
+  paddingVertical: 15,
+},
+Logo: {
+  width: 100,
+  height: 40,
+},
+localNavLinks: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingHorizontal: 20,
+  paddingVertical: 10,
+  backgroundColor: '#f5f5f5',
+},
+localNavLink: {
+  color: '#4CAF50',
+  fontSize: 14,
+  fontWeight: '500',
+},
+localMainTitle: {
+  fontSize: 22,
+  fontWeight: 'bold',
+  color: '#333',
+  paddingHorizontal: 20,
+  paddingVertical: 15,
+  textAlign: 'center',
+},
+localCard: {
+  margin: 15,
+  backgroundColor: '#fff',
+  borderRadius: 8,
+  overflow: 'hidden',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  elevation: 2,
+},
+localCardImage: {
+  width: '100%',
+  height: 180,
+},
+localCardContent: {
+  padding: 15,
+},
+localCardTitle: {
+  fontSize: 20,
+  fontWeight: 'bold',
+  color: '#333',
+  marginBottom: 10,
+},
+localCardRow: {
+  flexDirection: 'row',
+  marginBottom: 8,
+},
+localCardLabel: {
+  fontWeight: 'bold',
+  width: 80,
+  color: '#555',
+},
+localCardText: {
+  flex: 1,
+  color: '#333',
+},
+localSports: {
+  flex: 1,
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+},
+localSportItem: {
+  marginRight: 15,
+  color: '#4CAF50',
+},
+localDescriptionTitle: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: '#333',
+  marginBottom: 10,
+  textAlign: 'center',
+
+},
+localDescription: {
+  borderTopWidth: 1,
+  borderTopColor: '#e0e0e0',
+  padding: 20,
+  backgroundColor: '#fff',
+  marginTop: 10,
+},
+localDescriptionText: {
+  fontSize: 16,
+  color: '#333',
+  lineHeight: 24,
+},
 });
 
 export { styles };

@@ -1,5 +1,5 @@
 import React  from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView } from 'react-native';
 import { MaterialIcons , MaterialCommunityIcons } from '@expo/vector-icons';
 import { Menu, MenuItem } from 'react-native-material-menu';
 import { styles } from './Styles.js';
@@ -43,8 +43,8 @@ const Wpage = () => {
       <View style={styles.fullContainer}>
       {/* Header com botões de Login/Registro */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>PINGO</Text>
-        
+        <Image source={require('../assets/WhitePingo.png')} style={styles.Logo} resizeMode="contain"/>
+      
         <View style={styles.authButtonsContainer}>
           <TouchableOpacity 
             style={styles.authButton}
@@ -136,21 +136,23 @@ const Wpage = () => {
 
       {/* Rodapé */}
       <View style={styles.footer}>
-        <Text style={styles.footerTitle}>PINGO</Text>
+        <Image source={require('../assets/PingoOficial 3.png')} style={styles.Logo} resizeMode="contain"/>
         <Text style={styles.footerText}>2025 PINGO, Inc</Text>
         
         <View style={styles.footerLinks}>
           <Text style={styles.footerLink}>Sobre o Pingo</Text>
           <Text style={styles.footerLink}>Perguntas Frequentes</Text>
         </View>
-        <Text style={styles.contactTitle}>Contatos</Text>
-        <TouchableOpacity onPress={handleEmailPress}>
-          <Text style={styles.contactLink}>E-mail: pingo@gmail.com</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity onPress={handlePhonePress}>
-          <Text style={styles.contactLink}>Telefone: +55 11 93836-5724</Text>
-        </TouchableOpacity>
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactTitle}>Contatos</Text>
+              <TouchableOpacity onPress={handleEmailPress}>
+                <Text style={styles.contactLink}>E-mail: pingo@gmail.com</Text>
+              </TouchableOpacity>
+                            
+              <TouchableOpacity onPress={handlePhonePress}>
+                <Text style={styles.contactLink}>Telefone: +55 11 93836-5724</Text>
+              </TouchableOpacity>
+          </View>
       </View>
       </ScrollView>
     </View>

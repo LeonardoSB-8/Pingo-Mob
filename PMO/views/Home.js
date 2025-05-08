@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const Home = () => {
   // Dados mockados das quadras (substituir por dados reais posteriormente)
+  
   const quadras = [
     {
       nome: "Quadra Moema",
@@ -47,34 +48,38 @@ const Home = () => {
     <ScrollView style={styles.fullContainer}>
       {/* Header Superior com Ícone de Usuário */}
       <View style={styles.mainHeader}>
-         {/* Espaço vazio para centralizar o título */}
         
-        <Text style={styles.appTitle}>PINGO</Text>
-        
+        <Image source={require('../assets/WhitePingo.png')} style={styles.Logo} resizeMode="contain"/>
+  
         <TouchableOpacity onPress={handleUserPress} style={styles.userIcon}>
-          <MaterialIcons name="account-circle" size={28} color="white" />
+          <MaterialIcons name="account-circle" size={32} color="white" />
         </TouchableOpacity>
       </View>
 
       {/* Subtítulo com Link */}
       <View style={styles.subHeader}>
-        <Text style={styles.sectionTitle}>Locais Disponíveis</Text>
         <TouchableOpacity onPress={handleSuggestionPress}>
-          <Text style={styles.indicateLink}>Indicar Local</Text>
+          <Text style={styles.indicateLink}>Indicar Local →</Text>
         </TouchableOpacity>
       </View>
+
+      <Text style={styles.localMainTitle}>Locais Disponíveis</Text>
 
 
       {/* Lista de Quadras */}
       {quadras.map((quadra, index) => (
-        <View key={index} style={styles.quadraContainer}>
+        <TouchableOpacity 
+        key={index}
+        onPress={() => navigation.navigate('Localidade', { localidade: quadra })}
+        style={styles.quadraContainer}
+      >
           {/* Cabeçalho da Quadra */}
           <View style={styles.quadraHeader}>
             <Image 
               source={quadra.foto} 
               style={styles.quadraImage} 
               resizeMode="cover"
-              defaultSource={require('../assets/favicon.png')} // Adicione uma imagem padrão
+              defaultSource={require('../assets/favicon.png')}
             />
             <View style={styles.quadraInfo}>
               <Text style={styles.quadraNome}>{quadra.nome}</Text>
@@ -102,11 +107,11 @@ const Home = () => {
                     ))}
                   </View>
             </View>
-        </View>
+        </TouchableOpacity>
       ))}
       {/* Rodapé */}
-      <View style={styles.homeFooter}>
-        <Text style={styles.footerTitle}>PINGO</Text>
+      <View style={styles.footer}>
+        <Image source={require('../assets/PingoOficial 3.png')} style={styles.Logo} resizeMode="contain"/>
         <Text style={styles.footerText}>© 2025 PINGO, Inc</Text>
         
         <View style={styles.footerLinks}>
