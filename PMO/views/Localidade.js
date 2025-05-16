@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, Linking, StyleSheet } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles';
+import { Menu, MenuItem } from 'react-native-material-menu';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Localidade = ({ route }) => {
   const navigation = useNavigation();
@@ -23,16 +25,46 @@ const Localidade = ({ route }) => {
       alert('Não foi possível abrir o formulário');
     });;
   };
+    const [visible, setVisible] = useState(false);
+  const hideMenu = () => setVisible(false);
+  const showMenu = () => setVisible(true);
+
+  const handleLogout = () => {
+    hideMenu();
+    // Adicione aqui sua lógica de logout
+  // Limpe o estado do usuário
+  // Exemplo com AsyncStorage:
+  AsyncStorage.removeItem('userToken');
+  // Redirecione para a tela de Wpage
+  navigation.navigate('Welcome Page');
+  };
 
   return (
     <ScrollView style={styles.fullContainer}>
       {/* Header Personalizado */}
       <View style={styles.mainHeader}>
-        <Image source={require('../assets/PingoOficial 3.png')} style={styles.Logo} resizeMode="contain"/>
-        <TouchableOpacity onPress={handleUserPress} style={styles.userIcon}>
-          <MaterialIcons name="account-circle" size={32} color="white" />
-        </TouchableOpacity>
-      </View>
+              
+      
+              <Image source={require('../assets/PingoOficial 3.png')} style={styles.Logo} resizeMode="contain"/>
+              
+              <View style={styles.userIconContainer}>
+                <Menu
+                  visible={visible}
+                  anchor={
+                    <TouchableOpacity onPress={showMenu}>
+                      <MaterialIcons name="account-circle" size={32} color="white" />
+                    </TouchableOpacity>}onRequestClose={hideMenu}>
+
+                  <MenuItem onPress={handleLogout}>
+                    <View style={styles.menuItemContent}>
+                      <MaterialCommunityIcons name="logout" size={20} color="#333" />
+                      <Text style={styles.menuItemText}>Sair</Text>
+                    </View>
+                  </MenuItem>
+
+                </Menu>
+              </View>
+            </View>
 
       {/* Links de Navegação */}
       <View style={styles.localNavLinks}>

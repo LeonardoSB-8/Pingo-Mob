@@ -5,6 +5,7 @@ import { Menu, MenuItem } from 'react-native-material-menu';
 import { styles } from './Styles.js';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -37,6 +38,13 @@ const Wpage = () => {
   const handlePhonePress = () => {
     Linking.openURL('tel:+5511938365724');
   };
+  const handleLogout = () => {
+  // Limpe o estado do usuário
+  // Exemplo com AsyncStorage:
+  AsyncStorage.removeItem('userToken');
+  // Redirecione para a tela de login
+  navigation.navigate('Login');
+};
   // Componente seguro
 
   return (

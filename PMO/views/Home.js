@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Linking } from 'react-native';
 import { styles } from './Styles';
 import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons,  MaterialCommunityIcons } from '@expo/vector-icons';
+import { Menu, MenuItem } from 'react-native-material-menu';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
+ 
+  const [visible, setVisible] = useState(false);
+  const hideMenu = () => setVisible(false);
+  const showMenu = () => setVisible(true);
+
+  const handleLogout = () => {
+    hideMenu();
+    // Adicione aqui sua lógica de logout
+  // Limpe o estado do usuário
+  // Exemplo com AsyncStorage:
+  AsyncStorage.removeItem('userToken');
+  // Redirecione para a tela de Wpage
+  navigation.navigate('Welcome Page');
+  };
+
   // Dados mockados das quadras (substituir por dados reais posteriormente)
-  
   const quadras = [
     {
       nome: "Quadra Moema",
@@ -31,11 +47,12 @@ const Home = () => {
     });
   };
 
-  const handleUserPress = () => {
-    if (navigation) {
-      navigation.navigate('Perfil');
-    }
-  };
+  // const handleUserPress = () => {
+  //   if (navigation) {
+  //     navigation.navigate('Perfil');
+  //   }
+  // };
+
    const handleEmailPress = () => {
       Linking.openURL('mailto:pingo@gmail.com');
     };
@@ -45,16 +62,31 @@ const Home = () => {
     };
 
   return (
-    <ScrollView style={styles.fullContainer}>
+      <ScrollView style={styles.fullContainer}>
       {/* Header Superior com Ícone de Usuário */}
       <View style={styles.mainHeader}>
-        
+
         <Image source={require('../assets/WhitePingo.png')} style={styles.Logo} resizeMode="contain"/>
-  
-        <TouchableOpacity onPress={handleUserPress} style={styles.userIcon}>
-          <MaterialIcons name="account-circle" size={32} color="white" />
-        </TouchableOpacity>
+        
+        <View style={styles.userIconContainer}>
+          <Menu
+            visible={visible}
+            anchor={
+              <TouchableOpacity onPress={showMenu}>
+                <MaterialIcons name="account-circle" size={28} color="white" />
+              </TouchableOpacity>}onRequestClose={hideMenu}>
+            
+            <MenuItem onPress={handleLogout}>
+              <View style={styles.menuItemContent}>
+                <MaterialCommunityIcons name="logout" size={20} color="#333" />
+                <Text style={styles.menuItemText}>Sair</Text>
+              </View>
+            </MenuItem>
+            
+          </Menu>
+        </View>
       </View>
+
 
       {/* Subtítulo com Link */}
       <View style={styles.subHeader}>

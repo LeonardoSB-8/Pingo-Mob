@@ -488,6 +488,24 @@ localDescriptionText: {
   color: '#333',
   lineHeight: 24,
 },
+// ===== TELA SAIR ===== //
+userIconContainer: {
+  flex: 1,
+  alignItems: 'flex-end',
+},
+menuItem: {
+  padding: 10,
+},
+menuItemContent: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  paddingVertical: 5,
+},
+menuItemText: {
+  fontSize: 16,
+  color: '#333',
+  marginLeft: 10,
+},
 });
 
 export { styles };
