@@ -94,6 +94,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
+  disabledButton: {
+  backgroundColor: '#81C784', // Verde mais claro
+  opacity: 0.7,
+},
   
   // ===== WELCOME PAGE ===== //
   headerContainer: {
