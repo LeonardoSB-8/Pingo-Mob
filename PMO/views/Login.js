@@ -1,18 +1,67 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Alert, ActivityIndicator} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../api';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    // Lógica de autenticação aqui
-    navigation.navigate('Home'); // Redirecionar após login
+  const handleChange = (name, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleLogin = async () => {
+    // Validações básicas
+    if (!formData.email || !formData.password) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos');
+      return;
+    }
+
+    if (!formData.email.includes('@') || !formData.email.includes('.')) {
+      Alert.alert('Erro', 'Por favor, insira um email válido');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await api.post('/login', {
+        Email: formData.email,
+        Senha: formData.password
+      });
+
+      if (response.data.success) {
+        // Login bem-sucedido - você pode armazenar o token/userData aqui
+        navigation.navigate('Home', { user: response.data.user });
+      } else {
+        Alert.alert('Erro', response.data.message || 'Credenciais inválidas');
+      }
+    } catch (error) {
+      console.error('Erro no login:', error);
+      
+      let errorMessage = 'Erro ao conectar com o servidor';
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.message?.includes('Network Error')) {
+        errorMessage = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+      }
+      
+      Alert.alert('Erro', errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const navigateToRegister = () => {
@@ -42,8 +91,8 @@ const Login = () => {
               placeholderTextColor="#999"
               keyboardType="email-address"
               autoCapitalize="none"
-              value={email}
-              onChangeText={setEmail}
+              value={formData.email}
+              onChangeText={(text) => handleChange('email', text)}
             />
           </View>
 
@@ -56,8 +105,8 @@ const Login = () => {
                 placeholder="********"
                 placeholderTextColor="#999"
                 secureTextEntry={!showPassword}
-                value={password}
-                onChangeText={setPassword}
+                value={formData.password}
+                onChangeText={(text) => handleChange('password', text)}
               />
               <TouchableOpacity 
                 style={styles.eyeIcon}
@@ -74,10 +123,15 @@ const Login = () => {
 
           {/* Botão de Continuar */}
           <TouchableOpacity 
-            style={styles.primaryButton}
+            style={[styles.primaryButton, isLoading && styles.disabledButton]}
             onPress={handleLogin}
+            disabled={isLoading}
           >
-            <Text style={styles.primaryButtonText}>Continuar</Text>
+            {isLoading ? (
+              <ActivityIndicator color="#FFF" />
+            ) : (
+              <Text style={styles.primaryButtonText}>Continuar</Text>
+            )}
           </TouchableOpacity>
         </View>
 
@@ -92,6 +146,5 @@ const Login = () => {
     </KeyboardAvoidingView>
   );
 };
-
 
 export default Login;

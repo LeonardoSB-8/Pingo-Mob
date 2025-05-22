@@ -25,7 +25,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'Root@12345<>',
-  database: 'PINGO',
+  database: 'PINGO_C',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -49,7 +49,7 @@ app.post('/login', async (req, res) => {
     
     // 1. Busca o usuário pelo email
     const [rows] = await pool.execute(
-      'SELECT * FROM usuario WHERE Email = ?',
+      'SELECT * FROM Usuario WHERE Email = ?',
       [Email]
     );
     
@@ -64,7 +64,7 @@ app.post('/login', async (req, res) => {
     
     if (match) {
       const { Senha, ...userData } = user;
-      res.json({ success: true, user: userData });
+      res.json({ success: true, user: userData, message: 'Login bem-sucedido' });
     } else {
       res.status(401).json({ success: false, message: 'Senha incorreta' });
     }
@@ -82,7 +82,7 @@ app.post('/register', async (req, res) => {
 
     // 1. Verifica se usuário já existe
     const [existingUsers] = await pool.execute(
-      'SELECT * FROM usuario WHERE Email = ? OR CPF = ?',
+      'SELECT * FROM Usuario WHERE Email = ? OR CPF = ?',
       [Email, CPF.replace(/\D/g, '')]
     );
 
@@ -99,7 +99,7 @@ app.post('/register', async (req, res) => {
 
     // 3. Insere novo usuário
     const [result] = await pool.execute(
-      'INSERT INTO usuario (NomeUsuario, Email, CPF, Senha) VALUES (?, ?, ?, ?)',
+      'INSERT INTO Usuario (NomeUsuario, Email, CPF, Senha) VALUES (?, ?, ?, ?)',
       [NomeUsuario, Email, CPF.replace(/\D/g, ''), hash]
     );
 
