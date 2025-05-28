@@ -119,6 +119,93 @@ app.post('/register', async (req, res) => {
   }
 });
 
+// Rota para buscar quadras com esportes e fotos
+app.get('/quadras', async (req, res) => {
+  try {
+    const [results] = await pool.query(`
+      SELECT 
+        q.ID_Quadra,
+        q.NomeQuadra,
+        q.EnderecoQuadra,
+        GROUP_CONCAT(DISTINCT e.NomeEsporte SEPARATOR ', ') AS Esportes,
+        q.Descricao,
+        q.Cidade,
+        q.Bairro,
+        q.Regiao,
+        GROUP_CONCAT(DISTINCT fq.URL_Foto SEPARATOR '; ') AS Fotos
+      FROM 
+        Quadra q
+      LEFT JOIN 
+        QuadraEsporte qe ON q.ID_Quadra = qe.ID_Quadra
+      LEFT JOIN 
+        Esportes e ON qe.ID_Esporte = e.ID_Esporte
+      LEFT JOIN 
+        FotosQuadra fq ON q.ID_Quadra = fq.ID_Quadra
+      GROUP BY 
+        q.ID_Quadra
+    `);
+
+    res.json({ 
+      success: true,
+      quadras: results 
+    });
+  } catch (err) {
+    console.error('Erro ao buscar quadras:', err);
+    res.status(500).json({ 
+      success: false,
+      message: 'Erro ao buscar quadras' 
+    });
+  }
+});
+
+// Rota para buscar detalhes de uma única quadra
+app.get('/quadras/:id', async (req, res) => {
+  try {
+    const [results] = await pool.query(`
+      SELECT 
+        q.ID_Quadra,
+        q.NomeQuadra,
+        q.EnderecoQuadra,
+        GROUP_CONCAT(DISTINCT e.NomeEsporte SEPARATOR ', ') AS Esportes,
+        q.Descricao,
+        q.Cidade,
+        q.Bairro,
+        q.Regiao,
+        GROUP_CONCAT(DISTINCT fq.URL_Foto SEPARATOR '; ') AS Fotos
+      FROM 
+        Quadra q
+      LEFT JOIN 
+        QuadraEsporte qe ON q.ID_Quadra = qe.ID_Quadra
+      LEFT JOIN 
+        Esportes e ON qe.ID_Esporte = e.ID_Esporte
+      LEFT JOIN 
+        FotosQuadra fq ON q.ID_Quadra = fq.ID_Quadra
+      WHERE 
+        q.ID_Quadra = ?
+      GROUP BY 
+        q.ID_Quadra
+    `, [req.params.id]);
+
+    if (results.length === 0) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'Quadra não encontrada' 
+      });
+    }
+
+    res.json({ 
+      success: true,
+      quadra: results[0] 
+    });
+  } catch (err) {
+    console.error('Erro ao buscar quadra:', err);
+    res.status(500).json({ 
+      success: false,
+      message: 'Erro ao buscar quadra' 
+    });
+  }
+});
+
 // Rota de saúde do servidor
 app.get('/health', (req, res) => {
   res.json({ status: 'online', timestamp: new Date() });

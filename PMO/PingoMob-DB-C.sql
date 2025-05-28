@@ -22,11 +22,11 @@ create table Quadra(
     ID_Quadra int auto_increment,
     NomeQuadra varchar(50) not null,
     EnderecoQuadra varchar(50) not null,
-    Contato varchar(11) not null,
     Descricao text,
     Foto blob,
     Cidade varchar(50),
     Bairro varchar(50),
+    Regiao varchar(50),
     primary key (ID_Quadra)
 );
 
@@ -56,11 +56,11 @@ VALUES
 ('Futebol');      -- ID 4
 
 -- Inserir quadras 
-INSERT INTO Quadra (NomeQuadra, EnderecoQuadra, Contato, Descricao, Cidade, Bairro)
+INSERT INTO Quadra (NomeQuadra, EnderecoQuadra,  Descricao, Cidade, Bairro, Regiao)
 VALUES 
-('Campo de Futebol Society Bom de Bola', 'Avenida Brasil, 456', '21991234567', 'Excelente campo de grama sintética.', 'Rio de Janeiro', 'Copacabana'),
+('Campo de Futebol Society Bom de Bola', 'Avenida Brasil, 456', 'Excelente campo de grama sintética.', 'Rio de Janeiro - RJ', 'Copacabana','Zona Sul'),
 
-('Quadra Poliesportiva Central', 'Rua das Flores, 123', '11987654321', 'Ótima quadra para diversos esportes.', 'São Paulo', 'Centro');
+('Quadra Poliesportiva Central', 'Rua das Flores, 123', 'Ótima quadra para diversos esportes.', 'São Paulo - SP', 'Paulista', 'Centro');
 
 -- Inserir relações entre quadras e esportes
 INSERT INTO QuadraEsporte (ID_Quadra, ID_Esporte) VALUES
@@ -72,10 +72,10 @@ INSERT INTO QuadraEsporte (ID_Quadra, ID_Esporte) VALUES
 -- Inserir fotos
 INSERT INTO FotosQuadra (ID_Quadra, URL_Foto)
 VALUES
-(1, 'https://github.com/ph-pimentel/pingo-tcc/blob/master/pingo/public/img/Carrossel/image1.jpg'),
-(1, 'https://github.com/ph-pimentel/pingo-tcc/blob/master/pingo/public/img/Carrossel/image2.jpeg'),
-(2, 'https://github.com/ph-pimentel/pingo-tcc/blob/master/pingo/public/img/Carrossel/image3.jpg'),
-(2, 'https://github.com/ph-pimentel/pingo-tcc/blob/master/pingo/public/img/Carrossel/image4.jpg');
+(1, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image1.jpg'),
+(1, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image2.jpeg'),
+(2, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image3.jpg'),
+(2, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image4.jpg');
 
 -- Inserir usuário
 INSERT INTO Usuario (NomeUsuario, Email, CPF, Senha)
@@ -95,11 +95,11 @@ SELECT
     q.ID_Quadra,
     q.NomeQuadra,
     q.EnderecoQuadra,
-    q.Contato,
     GROUP_CONCAT(DISTINCT e.NomeEsporte SEPARATOR ', ') AS Esportes,
     q.Descricao,
     q.Cidade,
     q.Bairro,
+    q.Regiao,
     GROUP_CONCAT(DISTINCT fq.URL_Foto SEPARATOR '; ') AS Fotos
 FROM 
     Quadra q

@@ -288,7 +288,11 @@ const styles = StyleSheet.create({
   paddingVertical: 15,
   paddingHorizontal: 20,
 },
-
+loadingContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center'
+},
 
 // Sub-header
 subHeader: {
@@ -383,6 +387,9 @@ indicateLink: {
   detailValue: {
     flex: 1,
     color: '#333',
+  },
+    enderecoContainer: {
+    flex: 1,
   },
   esportesContainer: {
     marginTop: 10,
