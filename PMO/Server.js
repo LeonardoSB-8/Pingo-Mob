@@ -1,24 +1,24 @@
+// Importação dos módulos necessários
 const express = require('express');
-const mysql = require('mysql2/promise'); // Usando a versão promise-based
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const mysql = require('mysql2/promise'); // MySQL com suporte a Promises
+const bcrypt = require('bcrypt');        // Para hash de senhas
+const saltRounds = 10;                   // Nível de segurança do hash
 const cors = require('cors');
 const app = express();
 
-// Configuração do CORS mais segura para desenvolvimento
+// Configuração do CORS para permitir requisições de qualquer origem (desenvolvimento)
 const corsOptions = {
-  origin: '*', // Permite qualquer origem (apenas para desenvolvimento)
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   credentials: true,
   optionsSuccessStatus: 200
 };
 
-
-// Middlewares
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
-app.use(express.json());
+// Middlewares globais
+app.use(cors(corsOptions));      // Habilita CORS
+app.options('*', cors(corsOptions)); // Habilita CORS para todas as rotas
+app.use(express.json());         // Permite receber JSON no body das requisições
 
 // Configuração do pool de conexões MySQL
 const pool = mysql.createPool({
@@ -31,7 +31,7 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Testar conexão com o banco
+// Testa a conexão com o banco ao iniciar o servidor
 pool.getConnection()
   .then(conn => {
     console.log('Conectado ao MySQL!');
@@ -42,28 +42,26 @@ pool.getConnection()
     process.exit(1);
   });
 
-// Rota de login
+/**
+ * ROTA: POST /login
+ * Descrição: Realiza o login do usuário verificando email e senha.
+ */
 app.post('/login', async (req, res) => {
   try {
     const { Email, Senha } = req.body;
-    
-    // 1. Busca o usuário pelo email
+    // Busca usuário pelo email
     const [rows] = await pool.execute(
       'SELECT * FROM Usuario WHERE Email = ?',
       [Email]
     );
-    
     if (rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Usuário não encontrado' });
     }
-    
     const user = rows[0];
-    
-    // 2. Compara a senha
+    // Compara a senha informada com o hash salvo no banco
     const match = await bcrypt.compare(Senha, user.Senha);
-    
     if (match) {
-      const { Senha, ...userData } = user;
+      const { Senha, ...userData } = user; // Remove a senha do retorno
       res.json({ success: true, user: userData, message: 'Login bem-sucedido' });
     } else {
       res.status(401).json({ success: false, message: 'Senha incorreta' });
@@ -74,18 +72,20 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Rota de registro
+/**
+ * ROTA: POST /register
+ * Descrição: Realiza o cadastro de um novo usuário, garantindo unicidade de email e CPF.
+ */
 app.post('/register', async (req, res) => {
   console.log('Dados recebidos no register:', req.body);
   try {
     const { NomeUsuario, Email, CPF, Senha } = req.body;
 
-    // 1. Verifica se usuário já existe
+    // Verifica se já existe usuário com o mesmo email ou CPF
     const [existingUsers] = await pool.execute(
       'SELECT * FROM Usuario WHERE Email = ? OR CPF = ?',
       [Email, CPF.replace(/\D/g, '')]
     );
-
     if (existingUsers.length > 0) {
       const conflict = existingUsers[0].Email === Email ? 'Email' : 'CPF';
       return res.status(409).json({ 
@@ -94,10 +94,10 @@ app.post('/register', async (req, res) => {
       });
     }
 
-    // 2. Cria hash da senha
+    // Gera hash da senha
     const hash = await bcrypt.hash(Senha, saltRounds);
 
-    // 3. Insere novo usuário
+    // Insere novo usuário no banco
     const [result] = await pool.execute(
       'INSERT INTO Usuario (NomeUsuario, Email, CPF, Senha) VALUES (?, ?, ?, ?)',
       [NomeUsuario, Email, CPF.replace(/\D/g, ''), hash]
@@ -119,7 +119,10 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Rota para buscar quadras com esportes e fotos
+/**
+ * ROTA: GET /quadras
+ * Descrição: Retorna todas as quadras, incluindo esportes e fotos associadas.
+ */
 app.get('/quadras', async (req, res) => {
   try {
     const [results] = await pool.query(`
@@ -158,7 +161,10 @@ app.get('/quadras', async (req, res) => {
   }
 });
 
-// Rota para buscar detalhes de uma única quadra
+/**
+ * ROTA: GET /quadras/:id
+ * Descrição: Retorna detalhes de uma quadra específica pelo ID.
+ */
 app.get('/quadras/:id', async (req, res) => {
   try {
     const [results] = await pool.query(`
@@ -206,18 +212,21 @@ app.get('/quadras/:id', async (req, res) => {
   }
 });
 
-// Rota de saúde do servidor
+/**
+ * ROTA: GET /health
+ * Descrição: Rota de saúde para verificar se o servidor está online.
+ */
 app.get('/health', (req, res) => {
   res.json({ status: 'online', timestamp: new Date() });
 });
 
-// Middleware de erro global
+// Middleware global para tratamento de erros não tratados
 app.use((err, req, res, next) => {
   console.error('Erro não tratado:', err);
   res.status(500).json({ success: false, message: 'Erro interno do servidor' });
 });
 
-// Iniciar servidor
+// Inicializa o servidor na porta definida (padrão: 3000)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
