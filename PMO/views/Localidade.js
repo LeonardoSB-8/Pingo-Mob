@@ -70,7 +70,7 @@ const Localidade = () => {
     <ScrollView style={styles.fullContainer}>
       {/* Header Personalizado */}
       <View style={styles.mainHeader}>
-        <Image source={require('../assets/PingoOficial 3.png')} style={styles.Logo} resizeMode="contain"/>
+        <Image source={require('../assets/WhitePingo.png')} style={styles.Logo} resizeMode="contain"/>
         
         <View style={styles.userIconContainer}>
           <Menu

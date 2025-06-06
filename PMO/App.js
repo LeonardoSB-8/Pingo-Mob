@@ -15,7 +15,7 @@ export default function App() {
   
   return (
     <NavigationContainer>
-      <SafeStatusBar backgroundColor="#4CAF50" barStyle="light-content" />
+      <SafeStatusBar backgroundColor="#4E94FF" barStyle="light-content" />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Welcome Page" component={Wpage} />
         <Stack.Screen name="Login" component={Login} />

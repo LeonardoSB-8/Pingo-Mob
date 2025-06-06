@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   footerLink: {
     fontSize: 14,
-    color: '#4CAF50',
+    color: '#4E94FF',
     marginHorizontal: 10,
     textDecorationLine: 'underline',
   },
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   contactLink: {
     fontSize: 14,
-    color: '#4CAF50',
+    color: '#4E94FF',
     marginVertical: 5,
     textDecorationLine: 'underline',
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   registerButton: {
-    backgroundColor: '#388E3C',
+    backgroundColor: '#297EFF',
   },
   authButtonText: {
     color: 'white',
@@ -95,13 +95,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   disabledButton: {
-  backgroundColor: '#81C784', // Verde mais claro
+  backgroundColor: '#87B7FF', // Verde mais claro
   opacity: 0.7,
 },
   
   // ===== WELCOME PAGE ===== //
   headerContainer: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#4E94FF',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#4CAF50',
+    color: '#4E94FF',
     marginBottom: 10,
   },
   subtitle: {
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#4CAF50',
+    color: '#4E94FF',
     marginBottom: 5,
   },
   sectionSubtitle: {
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   suggestionButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#4E94FF',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     top: 14,
   },
   primaryButton: { // Este estilo será usado pelo botão "Continuar, Criar"
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#4E94FF',
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 24,
@@ -275,14 +275,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   authLink: { // Texto "Registrar"
-    color: '#4CAF50',
+    color: '#4E94FF',
     fontWeight: '600',
     fontSize: 14,
     marginLeft: 4,
   },
 // ===== TELA HOME ===== //
  mainHeader: {
-  backgroundColor: '#4CAF50',
+  backgroundColor: '#4E94FF',
   flexDirection: 'row',
   justifyContent: 'space-between',
   paddingVertical: 15,
@@ -310,7 +310,7 @@ sectionTitle: {
   color: '#333',
 },
 indicateLink: {
-  color: '#4CAF50',
+  color: '#4E94FF',
   fontWeight: '600',
   textDecorationLine: 'underline',
 },
@@ -328,7 +328,7 @@ indicateLink: {
     color: '#333',
   },
   homeHeader: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#4E94FF',
     paddingVertical: 20,
     paddingHorizontal: 15,
   },
@@ -369,7 +369,7 @@ indicateLink: {
   },
   quadraEsportes: {
     fontSize: 14,
-    color: '#4CAF50',
+    color: '#4E94FF',
     fontWeight: '500',
   },
   quadraDetails: {
@@ -396,7 +396,7 @@ indicateLink: {
     paddingLeft: 10,
   },
   esporteItem: {
-    color: '#4CAF50',
+    color: '#4E94FF',
     marginBottom: 5,
     includeFontPadding: false,
   },
@@ -421,7 +421,7 @@ localNavLinks: {
   backgroundColor: '#f5f5f5',
 },
 localNavLink: {
-  color: '#4CAF50',
+  color: '#4E94FF',
   fontSize: 14,
   fontWeight: '500',
 },
@@ -477,7 +477,7 @@ localSports: {
 },
 localSportItem: {
   marginRight: 15,
-  color: '#4CAF50',
+  color: '#4E94FF',
 },
 localDescriptionTitle: {
   fontSize: 18,

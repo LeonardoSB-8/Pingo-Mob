@@ -80,7 +80,7 @@ const Home = () => {
             visible={visible}
             anchor={
               <TouchableOpacity onPress={showMenu}>
-                <MaterialIcons name="account-circle" size={28} color="white" />
+                <MaterialIcons name="account-circle" size={32} color="white" />
               </TouchableOpacity>
             }
             onRequestClose={hideMenu}

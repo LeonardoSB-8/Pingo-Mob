@@ -78,7 +78,7 @@ const Wpage = () => {
           Aplicativo informativo de localidades esportivas públicas
         </Text>
         <Text style={styles.description}>
-          Buscando incentivar diversidade dos práticos corporais, exercitando o físico e promovendo o bem-estar.
+          Buscando incentivar a diversidade das práticas corporais, exercitando o físico e promovendo o bem-estar.
         </Text>
       </View>
 
@@ -92,17 +92,17 @@ const Wpage = () => {
         
         <View style={styles.stepsContainer}>
           <View style={styles.step}>
-            <MaterialIcons name="search" size={30} color="#4CAF50" />
+            <MaterialIcons name="search" size={30} color="#4E94FF" />
             <Text style={styles.stepText}>Encontre a local que Deseja</Text>
           </View>
           
           <View style={styles.step}>
-            <MaterialIcons name="info" size={30} color="#4CAF50" />
+            <MaterialIcons name="info" size={30} color="#4E94FF" />
             <Text style={styles.stepText}>Se informe a respeito do local</Text>
           </View>
           
           <View style={styles.step}>
-            <MaterialIcons name="sports-soccer" size={30} color="#4CAF50" />
+            <MaterialIcons name="sports-soccer" size={30} color="#4E94FF" />
             <Text style={styles.stepText}>Se divirta!</Text>
           </View>
         </View>

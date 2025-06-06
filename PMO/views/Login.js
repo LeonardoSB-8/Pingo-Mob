@@ -116,7 +116,7 @@ const Login = () => {
                 <MaterialIcons 
                   name={showPassword ? 'visibility-off' : 'visibility'} 
                   size={24} 
-                  color="#4CAF50" 
+                  color="#4E94FF" 
                 />
               </TouchableOpacity>
             </View>

@@ -119,10 +119,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-/**
- * ROTA: GET /quadras
- * Descrição: Retorna todas as quadras, incluindo esportes e fotos associadas.
- */
+ /* ROTA: GET /quadras | Descrição: Retorna todas as quadras, incluindo esportes e fotos associadas. */
 app.get('/quadras', async (req, res) => {
   try {
     const [results] = await pool.query(`
