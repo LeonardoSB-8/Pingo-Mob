@@ -60,22 +60,29 @@ INSERT INTO Quadra (NomeQuadra, EnderecoQuadra,  Descricao, Cidade, Bairro, Regi
 VALUES 
 ('Campo de Futebol Society Bom de Bola', 'Avenida Brasil, 456', 'Excelente campo de grama sintética.', 'Rio de Janeiro - RJ', 'Copacabana','Zona Sul'),
 
-('Quadra Poliesportiva Central', 'Rua das Flores, 123', 'Ótima quadra para diversos esportes.', 'São Paulo - SP', 'Paulista', 'Centro');
+('Quadra Poliesportiva Central', 'Rua das Flores, 123', 'Ótima quadra para diversos esportes.', 'São Paulo - SP', 'Paulista', 'Centro'),
+
+('Arena Jd.Brasilia','Rua Monte Alegre do Sul, 738','Socity pra geral!','São Paulo - SP','Jd.Brasilia','Zona Norte'),
+
+('Qudrinha Do Véio','Av.matoso ramos, 6656','Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.','Recife - PB','Matosinho','Zona Leste');
 
 -- Inserir relações entre quadras e esportes
 INSERT INTO QuadraEsporte (ID_Quadra, ID_Esporte) VALUES
 (1, 4), -- Quadra 1 - Futebol
 (1, 3), -- Quadra 1 - Basquete
 (2, 1), -- Quadra 2 - Futsal
-(2, 2); -- Quadra 2 - Vôlei
+(2, 2), -- Quadra 2 - Vôlei
+(3, 4),
+(4, 2),
+(4, 3); 
 
 -- Inserir fotos
 INSERT INTO FotosQuadra (ID_Quadra, URL_Foto)
 VALUES
 (1, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image1.jpg'),
-(1, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image2.jpeg'),
-(2, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image3.jpg'),
-(2, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image4.jpg');
+(2, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image2.jpeg'),
+(3, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image3.jpg'),
+(4, 'https://raw.githubusercontent.com/ph-pimentel/pingo-tcc/refs/heads/master/pingo/public/img/Carrossel/image4.jpg');
 
 -- Inserir usuário
 INSERT INTO Usuario (NomeUsuario, Email, CPF, Senha)
