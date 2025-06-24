@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Image, TouchableOpacity, Linking, StyleSheet, A
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { styles } from './Styles';
-import { Menu, MenuItem } from 'react-native-material-menu';
+import { Menu, Provider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 
@@ -35,11 +35,8 @@ const Localidade = () => {
     fetchLocalidade();
   }, [localidadeId]);
 
-  const hideMenu = () => setVisible(false);
-  const showMenu = () => setVisible(true);
-
   const handleLogout = async () => {
-    hideMenu();
+    setVisible(false);
     try {
       await AsyncStorage.removeItem('userToken');
       navigation.navigate('Welcome Page');
@@ -67,114 +64,117 @@ const Localidade = () => {
   }
 
   return (
-    <ScrollView style={styles.fullContainer}>
-      {/* Header Personalizado */}
-      <View style={styles.mainHeader}>
-        <Image source={require('../assets/WhitePingo.png')} style={styles.Logo} resizeMode="contain"/>
-        
-        <View style={styles.userIconContainer}>
+    <Provider>
+      <ScrollView style={styles.fullContainer}>
+        {/* Header Personalizado */}
+        <View style={styles.mainHeader}>
+          <Image source={require('../assets/WhitePingo.png')} style={styles.Logo} resizeMode="contain"/>
           <Menu
             visible={visible}
+            onDismiss={() => setVisible(false)}
             anchor={
-              <TouchableOpacity onPress={showMenu}>
+              <TouchableOpacity onPress={() => setVisible(true)}>
                 <MaterialIcons name="account-circle" size={32} color="white" />
               </TouchableOpacity>
             }
-            onRequestClose={hideMenu}
+            contentStyle={{ backgroundColor: '#fff' }}
           >
-            <MenuItem onPress={handleLogout}>
-              <View style={styles.menuItemContent}>
+            <Menu.Item
+              onPress={handleLogout}
+              title="Sair"
+              leadingIcon={() => (
                 <MaterialCommunityIcons name="logout" size={20} color="#333" />
-                <Text style={styles.menuItemText}>Sair</Text>
-              </View>
-            </MenuItem>
+              )}
+              titleStyle={styles.menuItemText}
+              style={styles.menuItemContent}
+            />
           </Menu>
         </View>
-      </View>
 
-      {/* Links de Navegação */}
-      <View style={styles.localNavLinks}>
-        <TouchableOpacity onPress={handleBackPress}>
-          <Text style={styles.indicateLink}>← Locais Disponíveis</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSuggestionPress}>
-          <Text style={styles.indicateLink}>Sugerir Localidade Pública →</Text>
-        </TouchableOpacity>
-      </View>
+        {/* Links de Navegação */}
+        <View style={styles.localNavLinks}>
+          <TouchableOpacity onPress={handleBackPress}>
+            <Text style={styles.indicateLink}>← Locais Disponíveis</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleSuggestionPress}>
+            <Text style={styles.indicateLink}>Sugerir Localidade Pública →</Text>
+          </TouchableOpacity>
+        </View>
 
-      {/* Título Principal */}
-      <Text style={styles.localMainTitle}>Informações da Localidade</Text>
+        {/* Título Principal */}
+        <Text style={styles.localMainTitle}>Informações da Localidade</Text>
 
-      {/* Card da Quadra */}
-      <View style={styles.localCard}>
-        {localidade.Fotos && localidade.Fotos.split('; ')[0] && (
-          <Image 
-            source={{ uri: localidade.Fotos.split('; ')[0] }} 
-            style={styles.localCardImage}
-            resizeMode="cover"
-            defaultSource={require('../assets/favicon.png')}
-          />
-        )}
-        
-        <View style={styles.localCardContent}>
-          <Text style={styles.localCardTitle}>{localidade.NomeQuadra}</Text>
+        {/* Card da Quadra */}
+        <View style={styles.localCard}>
+          {localidade.Fotos && localidade.Fotos.split('; ')[0] && (
+            <Image 
+              source={{ uri: localidade.Fotos.split('; ')[0] }} 
+              style={styles.localCardImage}
+              resizeMode="cover"
+              defaultSource={require('../assets/favicon.png')}
+            />
+          )}
           
-          {/* Detalhes da Quadra */}
-          <View style={styles.localCardRow}>
-            <Text style={styles.localCardLabel}>Região:</Text>
-            <Text style={styles.localCardText}>{localidade.Regiao}</Text>
-          </View>
-          
-          <View style={styles.localCardRow}>
-            <Text style={styles.localCardLabel}>Endereço:</Text>
-            <View style={styles.enderecoContainer}>
-              <Text style={styles.localCardText}>{localidade.EnderecoQuadra}</Text>
-              <Text style={styles.localCardText}>
-                {localidade.Bairro}, {localidade.Cidade}
+          <View style={styles.localCardContent}>
+            <Text style={styles.localCardTitle}>{localidade.NomeQuadra}</Text>
+            
+            {/* Detalhes da Quadra */}
+            <View style={styles.localCardRow}>
+              <Text style={styles.localCardLabel}>Região:</Text>
+              <Text style={styles.localCardText}>{localidade.Regiao}</Text>
+            </View>
+            
+            <View style={styles.localCardRow}>
+              <Text style={styles.localCardLabel}>Endereço:</Text>
+              <View style={styles.enderecoContainer}>
+                <Text style={styles.localCardText}>{localidade.EnderecoQuadra}</Text>
+                <Text style={styles.localCardText}>
+                  {localidade.Bairro}, {localidade.Cidade}
+                </Text>
+              </View>
+            </View>
+            
+            <View style={styles.localCardRow}>
+              <Text style={styles.localCardLabel}>Esportes:</Text>
+              <View style={styles.localSports}>
+                {localidade.Esportes.split(', ').map((esporte, i) => (
+                  <Text key={i} style={styles.localSportItem}>• {esporte}</Text>
+                ))}
+              </View>
+            </View>
+            
+            {/* Descrição */}
+            <View style={styles.localDescription}>
+              <Text style={styles.localDescriptionTitle}>Descrição</Text>
+              <Text style={styles.localDescriptionText}>
+                {localidade.Descricao || "Nenhuma descrição disponível."}
               </Text>
             </View>
           </View>
-          
-          <View style={styles.localCardRow}>
-            <Text style={styles.localCardLabel}>Esportes:</Text>
-            <View style={styles.localSports}>
-              {localidade.Esportes.split(', ').map((esporte, i) => (
-                <Text key={i} style={styles.localSportItem}>• {esporte}</Text>
-              ))}
-            </View>
-          </View>
-          
-          {/* Descrição */}
-          <View style={styles.localDescription}>
-            <Text style={styles.localDescriptionTitle}>Descrição</Text>
-            <Text style={styles.localDescriptionText}>
-              {localidade.Descricao || "Nenhuma descrição disponível."}
-            </Text>
-          </View>
         </View>
-      </View>
 
-      {/* Rodapé */}
-      <View style={styles.footer}>
-        <Image source={require('../assets/PingoOficial 3.png')} style={styles.Logo} resizeMode="contain"/>
-        <Text style={styles.footerText}>© 2025 PINGO, Inc</Text>
-        
-        <View style={styles.footerLinks}>
-          <Text style={styles.footerLink}>Sobre o Pingo</Text>
-          <Text style={styles.footerLink}>Perguntas Frequentes</Text>
+        {/* Rodapé */}
+        <View style={styles.footer}>
+          <Image source={require('../assets/PingoOficial 3.png')} style={styles.Logo} resizeMode="contain"/>
+          <Text style={styles.footerText}>© 2025 PINGO, Inc</Text>
+          
+          <View style={styles.footerLinks}>
+            <Text style={styles.footerLink}>Sobre o Pingo</Text>
+            <Text style={styles.footerLink}>Perguntas Frequentes</Text>
+          </View>
+          
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactTitle}>Contatos</Text>
+            <TouchableOpacity onPress={() => Linking.openURL('mailto:pingo@gmail.com')}>
+              <Text style={styles.contactLink}>E-mail: pingo@gmail.com</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL('tel:+5511938365724')}>
+              <Text style={styles.contactLink}>Telefone: +55 11 93836-5724</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        
-        <View style={styles.contactContainer}>
-          <Text style={styles.contactTitle}>Contatos</Text>
-          <TouchableOpacity onPress={() => Linking.openURL('mailto:pingo@gmail.com')}>
-            <Text style={styles.contactLink}>E-mail: pingo@gmail.com</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL('tel:+5511938365724')}>
-            <Text style={styles.contactLink}>Telefone: +55 11 93836-5724</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </Provider>
   );
 };
 
