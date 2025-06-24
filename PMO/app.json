@@ -9,12 +9,12 @@
     "splash": {
       "image": "./assets/cerebro.jpg",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#333"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/Whitelogo.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#333"
       },
       "newArchEnabled": true  
     },

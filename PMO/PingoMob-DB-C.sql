@@ -58,13 +58,13 @@ VALUES
 -- Inserir quadras 
 INSERT INTO Quadra (NomeQuadra, EnderecoQuadra,  Descricao, Cidade, Bairro, Regiao)
 VALUES 
-('Campo de Futebol Society Bom de Bola', 'Avenida Brasil, 456', 'Excelente campo de grama sintética.', 'Rio de Janeiro - RJ', 'Copacabana','Zona Sul'),
+('Campo Bom de Bola', 'Avenida Brasil, 456', 'Excelente campo de grama sintética.', 'Rio de Janeiro - RJ', 'Copacabana','Zona Sul'),
 
 ('Quadra Poliesportiva Central', 'Rua das Flores, 123', 'Ótima quadra para diversos esportes.', 'São Paulo - SP', 'Paulista', 'Centro'),
 
 ('Arena Jd.Brasilia','Rua Monte Alegre do Sul, 738','Socity pra geral!','São Paulo - SP','Jd.Brasilia','Zona Norte'),
 
-('Qudrinha Do Véio','Av.matoso ramos, 6656','Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.','Recife - PB','Matosinho','Zona Leste');
+('União Do Volei','Av.matoso ramos, 6656','Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.','Recife - PB','Matosinho','Zona Leste');
 
 -- Inserir relações entre quadras e esportes
 INSERT INTO QuadraEsporte (ID_Quadra, ID_Esporte) VALUES

@@ -285,6 +285,7 @@ const styles = StyleSheet.create({
   backgroundColor: '#4E94FF',
   flexDirection: 'row',
   justifyContent: 'space-between',
+  paddingTop: StatusBar.currentHeight + 10,
   paddingVertical: 15,
   paddingHorizontal: 20,
 },

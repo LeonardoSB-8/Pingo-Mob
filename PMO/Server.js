@@ -25,7 +25,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'Root@12345<>',
-  database: 'PINGO_C',
+  database: 'PINGO_C', // PingoMob-DB-C.sql
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
